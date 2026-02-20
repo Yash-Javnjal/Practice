@@ -13,42 +13,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal-up, .reveal-text').forEach(el => observer.observe(el));
 
-    
-const msg = document.getElementById("msg");
 
-function showMsg(text){
-    msg.textContent = text;
-    msg.classList.add("show");
+    const msg = document.getElementById("msg");
 
-    setTimeout(()=>{
-        msg.classList.remove("show");
-    },2000);
-}
+    function showMsg(text) {
+        msg.textContent = text;
+        msg.classList.add("show");
+
+        setTimeout(() => {
+            msg.classList.remove("show");
+        }, 2000);
+    }
 
 
-/* BUY BUTTON CLICK */
-document.querySelectorAll(".card button").forEach(btn=>{
-    btn.addEventListener("click",()=>{
+    /* BUY BUTTON CLICK */
+    document.querySelectorAll(".msg-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
 
-        const card = btn.closest(".card");
-        const place = card.querySelector("h3").textContent;
+            const card = btn.closest(".card");
+            const place = card.querySelector("h3").textContent;
 
-        showMsg(place + " trip booked successfully");
+            showMsg(place + " trip booked successfully");
 
+        });
     });
+
+
+    /* FORM SUBMIT */
+    const form = document.querySelector(".contact-form");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        showMsg("Your message has been sent successfully");
+
+        form.reset();
+    });
+
+
 });
 
 
-/* FORM SUBMIT */
-const form = document.querySelector(".contact-form");
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = IntersectionObserver((enteries) => {
+        enteries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        }, { thresold: 0.1 });
+        document.querySelectorAll('.reveal-up,.reveal-text').forEach(el => observer.observe(el));
+    })
 
-form.addEventListener("submit",(e)=>{
-    e.preventDefault();
+    const msg = document.querySelector('.msg');
 
-    showMsg("Your message has been sent successfully");
+    function showMsg(text) {
+        msg.textContent = text;
+        msg.classList.add('show');
 
-    form.reset();
-});
+        setTimeout(() => {
+            msg.classList.remove('show');
+        }, 2000);
+    }
+
+    document.querySelectorAll('.msg-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.card');
+            const place = card.querySelector('h3').textContent;
+            showMsg(place + ' trip booked successfully');
+        })
+    })
+
+    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        showMsg('Your message has been sent successfully');
+        form.reset();
+    });
+
+
 
 
 });

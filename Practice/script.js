@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
     /* 1. SCROLL ANIMATIONS */
@@ -28,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* BUY BUTTON CLICK */
     document.querySelectorAll(".msg-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener('click', () => {
 
-            const card = btn.closest(".card");
-            const place = card.querySelector("h3").textContent;
+            const card = btn.closest('.card');
+            const place = card.querySelector('h3').textContent;
 
             showMsg(place + " trip booked successfully");
 
@@ -49,47 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.reset();
     });
-
-
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = IntersectionObserver((enteries) => {
-        enteries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        }, { thresold: 0.1 });
-        document.querySelectorAll('.reveal-up,.reveal-text').forEach(el => observer.observe(el));
-    })
-
-    const msg = document.querySelector('.msg');
-
-    function showMsg(text) {
-        msg.textContent = text;
-        msg.classList.add('show');
-
-        setTimeout(() => {
-            msg.classList.remove('show');
-        }, 2000);
-    }
-
-    document.querySelectorAll('.msg-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const card = btn.closest('.card');
-            const place = card.querySelector('h3').textContent;
-            showMsg(place + ' trip booked successfully');
-        })
-    })
-
-    document.querySelector('.contact-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showMsg('Your message has been sent successfully');
-        form.reset();
-    });
-
-
 
 
 });

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>AngularJS Practical Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+
+    First Name:
+    <input type="text" ng-model="firstName"><br><br>
+
+    Last Name:
+    <input type="text" ng-model="lastName"><br><br>
+
+    <p><b>Full Name:</b> {{ firstName + ' ' + lastName }}</p>
+
+    <hr>
+
+    Enter Amount:
+    <input type="number" ng-model="amount"><br><br>
+
+    <p><b>Amount in Currency:</b> {{ amount | currency }}</p>
+
+    <hr>
+
+    <p><b>Today's Date:</b> {{ today | date:'MM/dd/yyyy' }}</p>
+
+<script>
+angular.module("myApp", [])
+.controller("myCtrl", function($scope) {
+
+    $scope.firstName = "";
+    $scope.lastName = "";
+    $scope.amount = 0;
+    $scope.today = new Date();
+
+});
+</script>
+
+</body>
+</html>

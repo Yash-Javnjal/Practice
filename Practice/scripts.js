@@ -35,6 +35,4 @@ document.addEventListener("DOMContentLoaded",()=>{
         showMsg("Your Message has been sent sucessfully")
         form.reset();
     });
-        
-    
 });

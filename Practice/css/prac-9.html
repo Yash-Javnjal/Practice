@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="eventApp">
+<head>
+    <title>AngularJS Events Practical</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="eventCtrl">
+
+<h2>AngularJS Events Example</h2>
+
+<!-- Button Color Change -->
+<button ng-click="changeColor()" 
+        ng-style="{'background-color': btnColor}">
+    Click Me
+</button>
+
+<p>Button clicked {{clickCount}} times</p>
+
+<hr>
+
+<!-- Key Press Count -->
+Enter Text:
+<input type="text" ng-keypress="countKey()">
+
+<p>Key Press Count: {{keyCount}}</p>
+
+<hr>
+
+<!-- Mouse Events -->
+<div style="height:120px; border:1px solid black;"
+     ng-mousemove="mouseMove($event)"
+     ng-mousedown="mouseDown($event)"
+     ng-mouseup="mouseUp($event)">
+
+    <p>Move Mouse Here</p>
+    <p>X: {{x}} | Y: {{y}}</p>
+</div>
+
+<script>
+angular.module("eventApp", [])
+.controller("eventCtrl", function($scope) {
+
+    // Button colours
+    $scope.colors = ["lightblue", "lightgreen", "orange"];
+    $scope.index = 0;
+    $scope.btnColor = $scope.colors[0];
+    $scope.clickCount = 0;
+
+    $scope.changeColor = function() {
+        $scope.clickCount++;
+        $scope.index = ($scope.index + 1) % $scope.colors.length;
+        $scope.btnColor = $scope.colors[$scope.index];
+    };
+
+    // Key press counter
+    $scope.keyCount = 0;
+    $scope.countKey = function() {
+        $scope.keyCount++;
+    };
+
+    // Mouse events
+    $scope.mouseMove = function(event) {
+        $scope.x = event.clientX;
+        $scope.y = event.clientY;
+        $scope.eventType = "Mouse Move";
+    };
+
+    $scope.mouseDown = function(event) {
+        $scope.eventType = "Mouse Down";
+    };
+
+    $scope.mouseUp = function(event) {
+        $scope.eventType = "Mouse Up";
+    };
+
+});
+</script>
+
+</body>
+</html>
